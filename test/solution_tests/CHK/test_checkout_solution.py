@@ -82,5 +82,18 @@ class TestCheckoutSolution(unittest.TestCase):
     def test_with_a_single_a_returns_cost_of_a(self):
         self.assertEqual(checkout_solution.checkout("A"), checkout_solution.stock_prices_by_sku["A"])
 
+    def test_with_a_ab_returns_cost_of_a_b(self):
+        self.assertEqual(
+            checkout_solution.checkout("AB"),
+            checkout_solution.stock_prices_by_sku["A"] + checkout_solution.stock_prices_by_sku["B"]
+        )
+
+    def test_with_a_aaab_returns_cost_of_special_a_and_b(self):
+        self.assertEqual(
+            checkout_solution.checkout("ABAA"),
+            checkout_solution.special_by_sku["A"].price + checkout_solution.stock_prices_by_sku["B"]
+        )
+
+
 
 
