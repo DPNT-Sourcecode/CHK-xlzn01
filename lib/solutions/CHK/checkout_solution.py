@@ -12,8 +12,12 @@ special_by_sku: Dict[str, Specials] = {
     "A": Specials(quantity=3, price=130), "B": Specials(quantity=2, price=45)
 }
 
-multibuy_specials: Dict[str, MultibuySpecial] = {
-
+price_table = {
+    "A": {"price": 50, "specials": {"3A": 130, "5A": 200}},
+    "B": {"price": 30, "specials": {"2B": 45}},
+    "C": {"price": 20},
+    "D": {"price": 15},
+    "E": {"price": 40, "specials": {"2E": }
 }
 
 def get_count_and_remove(skus: str, letter: str) -> Tuple[str, int]:
@@ -65,3 +69,4 @@ def checkout(skus: str) -> int:
     result += calculate_price_for_item_of_type(letter="D", count=num_d)
 
     return result
+
