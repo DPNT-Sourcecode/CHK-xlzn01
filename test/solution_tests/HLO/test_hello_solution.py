@@ -18,4 +18,3 @@ class TestHello(unittest.TestCase):
     def test_raises_error_when_null_friend_name(self):
         with self.assertRaises(AssertionError):
             hello_solution.hello(friend_name=None)
-

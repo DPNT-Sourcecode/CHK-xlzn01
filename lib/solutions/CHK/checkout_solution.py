@@ -11,6 +11,11 @@ special_by_sku: Dict[str, Tuple[int, int]] = {
     "A": Specials(quantity=3, price=130), "B": Specials(quantity=2, price=45)
 }
 
+def get_count_and_remove(input: str, letter: str) -> int:
+    count: int = input.count(letter)
+    result: str = input.replace(letter)
+    return result
+
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -19,4 +24,3 @@ def checkout(skus: str) -> int:
     num_a = skus.count("a")
 
     return result
-
