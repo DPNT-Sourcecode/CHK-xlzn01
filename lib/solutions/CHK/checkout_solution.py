@@ -17,8 +17,9 @@ price_table = {
     "B": {"price": 30, "specials": {"2B": 45}},
     "C": {"price": 20},
     "D": {"price": 15},
-    "E": {"price": 40, "specials": {"2E": }
+    "E": {"price": 40, "specials": {"2E": "B"}}
 }
+
 
 def get_count_and_remove(skus: str, letter: str) -> Tuple[str, int]:
     count: int = skus.count(letter)
@@ -52,15 +53,20 @@ def calculate_price_for_item_of_type(letter: str, count: int) -> int:
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus: str) -> int:
-    # Get the count of all the products.
-    skus, num_a = get_count_and_remove(skus=skus, letter="A")
-    skus, num_b = get_count_and_remove(skus=skus, letter="B")
-    skus, num_c = get_count_and_remove(skus=skus, letter="C")
-    skus, num_d = get_count_and_remove(skus=skus, letter="D")
+    # Calculate total price without any special offers.
+    total_price: int = 0
+    for item in skus:
+        # Invalid product inside.
+        if item not in price_table:
+            return -1
+        total_price += price_table[item]["price"]
 
-    # Invalid product inside.
-    if len(skus) > 0:
-        return -1
+    for item in price_table:
+        # If there is a special for the item.
+        if "specials" in price_table[item]:
+            for offer in price_table[item]["specials"]:
+                count = skus.
+
 
     result: int = 0
     result += calculate_price_for_item_of_type(letter="A", count=num_a)
@@ -69,4 +75,5 @@ def checkout(skus: str) -> int:
     result += calculate_price_for_item_of_type(letter="D", count=num_d)
 
     return result
+
 
