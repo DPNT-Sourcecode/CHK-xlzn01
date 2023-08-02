@@ -15,5 +15,3 @@ class TestSum(unittest.TestCase):
 
     def test_sum_with_five_and_six_returns_eleven(self):
         self.assertEquals(sum_solution.compute(5, 6), 11)
-
-
