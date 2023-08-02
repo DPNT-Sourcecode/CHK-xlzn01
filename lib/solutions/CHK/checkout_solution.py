@@ -37,7 +37,12 @@ def checkout(skus: str) -> int:
                         num_times: int = min(num_times, count_free_item)
                         total_price -= num_times * price_table[offer[-1]]["price"]
 
+                        # Remove used items from the basket.
+                        for i in range(num_times):
+                            skus = skus.replace(offer[-1], '', 1)
+
     return total_price
+
 
 
 
