@@ -93,7 +93,3 @@ class TestCheckoutSolution(unittest.TestCase):
             checkout_solution.checkout("ABAA"),
             checkout_solution.special_by_sku["A"].price + checkout_solution.stock_prices_by_sku["B"]
         )
-
-
-
-

@@ -2,6 +2,7 @@ from typing import Dict, Tuple, NamedTuple
 from collections import namedtuple
 
 Specials = namedtuple(typename="Specials", field_names=("quantity", "price"))
+MultibuySpecial = namedtuple(typename="MultibuySpecial", field_names=("item", "quantity", "price"))
 
 stock_prices_by_sku: Dict[str, int] = {
     "A": 50, "B": 30, "C": 20, "D": 15
@@ -11,6 +12,9 @@ special_by_sku: Dict[str, Specials] = {
     "A": Specials(quantity=3, price=130), "B": Specials(quantity=2, price=45)
 }
 
+multibuy_specials: Dict[str, MultibuySpecial] = {
+
+}
 
 def get_count_and_remove(skus: str, letter: str) -> Tuple[str, int]:
     count: int = skus.count(letter)
@@ -61,8 +65,3 @@ def checkout(skus: str) -> int:
     result += calculate_price_for_item_of_type(letter="D", count=num_d)
 
     return result
-
-
-
-
-
