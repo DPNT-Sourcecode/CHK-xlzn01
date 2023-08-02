@@ -18,18 +18,27 @@ def get_count_and_remove(skus: str, letter: str) -> Tuple[str, int]:
     result = skus.replace(letter, "")
     return result, count
 
+
 def find_quotient_and_remainder(dividend: int, divisor: int) -> Tuple[int, int]:
     quotient: int = dividend // divisor
     remainder: int = dividend % divisor
-    
+
+    return quotient, remainder
 
 
-def calculate_price_for_item(letter: str, count: int) -> int:
+def calculate_price_for_item_of_type(letter: str, count: int) -> int:
+    single_price: int = stock_prices_by_sku[letter]
     # Calculate with no specials.
     if letter not in special_by_sku:
-        return stock_prices_by_sku[letter] * count
+        return single_price * count
 
-    num_in_special: int = count // special_by_sku[letter].quanitity
+    special: Specials = special_by_sku[letter]
+    num_of_specials, num_of_singles = find_quotient_and_remainder(
+        dividend=count,
+        divisor=special.quantity
+    )
+
+    return (num_of_specials * special.price) + (num_of_singles * single_price)
 
 
 # noinspection PyUnusedLocal
@@ -48,6 +57,7 @@ def checkout(skus: str) -> int:
         return -1
 
     return result
+
 
 
 
