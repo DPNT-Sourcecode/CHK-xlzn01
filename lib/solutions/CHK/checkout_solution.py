@@ -18,7 +18,10 @@ def get_count_and_remove(skus: str, letter: str) -> Tuple[str, int]:
     result = skus.replace(letter, "")
     return result, count
 
-def find_quotient_and_remainder(dividend: int, )
+def find_quotient_and_remainder(dividend: int, divisor: int) -> Tuple[int, int]:
+    quotient: int = dividend // divisor
+    remainder: int = dividend % divisor
+    
 
 
 def calculate_price_for_item(letter: str, count: int) -> int:
@@ -45,5 +48,6 @@ def checkout(skus: str) -> int:
         return -1
 
     return result
+
 
 
