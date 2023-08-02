@@ -58,9 +58,29 @@ class TestCalculatePriceForSingle(unittest.TestCase):
             checkout_solution.special_by_sku[item].price
         )
 
+    def test_with_four_and_specials_returns_special_once_and_one_single(self):
+        item: str = "A"
+        num: int = 4
+        self.assertEqual(
+            checkout_solution.calculate_price_for_item_of_type(letter=item, count=num),
+            checkout_solution.special_by_sku[item].price + checkout_solution.stock_prices_by_sku[item]
+        )
+
+    def test_with_six_and_specials_returns_special_twice(self):
+        item: str = "A"
+        num: int = 6
+        self.assertEqual(
+            checkout_solution.calculate_price_for_item_of_type(letter=item, count=num),
+            checkout_solution.special_by_sku[item].price * 2
+        )
+
 
 class TestCheckoutSolution(unittest.TestCase):
-    def test_initial(self):
-        pass
+    def test_with_unmatching_item_returns_invalid(self):
+        self.assertEqual(checkout_solution.checkout("X"), -1)
+
+    def test_with_a_single_a_returns_cost_of_a(self):
+        self.assertEqual(checkout_solution.checkout("A"), checkout_solution.stock_prices_by_sku["A"])
+
 
 

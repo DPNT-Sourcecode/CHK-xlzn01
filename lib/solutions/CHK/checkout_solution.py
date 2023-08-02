@@ -44,8 +44,6 @@ def calculate_price_for_item_of_type(letter: str, count: int) -> int:
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus: str) -> int:
-    result: int = -1
-
     # Get the count of all the products.
     skus, num_a = get_count_and_remove(skus=skus, letter="A")
     skus, num_b = get_count_and_remove(skus=skus, letter="B")
@@ -56,7 +54,14 @@ def checkout(skus: str) -> int:
     if len(skus) > 0:
         return -1
 
+    result: int = 0
+    result += calculate_price_for_item_of_type(letter="A", count=num_a)
+    result += calculate_price_for_item_of_type(letter="B", count=num_b)
+    result += calculate_price_for_item_of_type(letter="C", count=num_c)
+    result += calculate_price_for_item_of_type(letter="D", count=num_d)
+
     return result
+
 
 
 
