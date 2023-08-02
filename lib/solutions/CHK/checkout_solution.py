@@ -65,7 +65,19 @@ def checkout(skus: str) -> int:
         # If there is a special for the item.
         if "specials" in price_table[item]:
             for offer in price_table[item]["specials"]:
-                count = skus.
+                # Determine then number of special items in the 'skus'.
+                count: int = skus.count(item)
+
+                # Compare against the number required for the special '3A' = 3.
+                if count >= int(offer[0]):
+                    # Compare against the item required.
+                    if offer[-1] in skus:
+                        count_free_item: int = skus.count(offer[-1])
+                        num_times: int = count // int(offer[0])
+                        num_times: int = min(num_times, count_free_item)
+                        total_price -= num_times * price_table[offer[-1]]
+
+
 
 
     result: int = 0
@@ -75,5 +87,6 @@ def checkout(skus: str) -> int:
     result += calculate_price_for_item_of_type(letter="D", count=num_d)
 
     return result
+
 
 
