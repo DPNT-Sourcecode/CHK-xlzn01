@@ -69,3 +69,15 @@ class TestCheckoutSolution(unittest.TestCase):
             330,
             checkout_solution.checkout("AAAAAAAA")
         )
+
+    def test_checkout_nine_a_returns_two_sets_multibuy_one_single(self):
+        self.assertEqual(
+            380,
+            checkout_solution.checkout("AAAAAAAAA")
+        )
+
+    def test_checkout_eight_a_three_b_two_e_returns_two_sets_multibuy_a_free_b_multibuy_b_and_cost_two_e(self):
+        self.assertEqual(
+            455,
+            checkout_solution.checkout("AAAAAEEBAAABB")
+        )
