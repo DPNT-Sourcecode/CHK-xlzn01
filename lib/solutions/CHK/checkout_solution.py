@@ -112,7 +112,8 @@ def checkout(skus: str) -> int:
 
 
 if __name__ == '__main__':
-    basket: str = "AAAAAEEBAAABB"
+    basket: str = "AAAAAAAAAA"
 
     print(checkout(skus=basket))
+
 
