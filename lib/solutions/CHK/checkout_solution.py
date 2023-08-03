@@ -81,13 +81,12 @@ def checkout(skus: str) -> int:
 
     # Process 'multibuys' and regular prices.
     for item, count in items.items():
-        if item not in multibuy_specials:
-            continue
-        # Take off any multibuy price.
-        multibuy_discount: int = apply_special_offers(
-            item=item, count_of_item=count, special_offers_to_process=multibuy_specials
-        )
-        total_checkout_value -= multibuy_discount
+        if item in multibuy_specials:
+            # Take off any multibuy price.
+            multibuy_discount: int = apply_special_offers(
+                item=item, count_of_item=count, special_offers_to_process=multibuy_specials
+            )
+            total_checkout_value -= multibuy_discount
 
         # Add regular price.
         total_checkout_value += price_table[item] * count
@@ -96,7 +95,7 @@ def checkout(skus: str) -> int:
 
 
 if __name__ == '__main__':
-    basket: str = "AABB"
+    basket: str = "EEB"
 
     print(checkout(skus=basket))
 
