@@ -25,6 +25,10 @@ def checkout(skus: str) -> int:
     # Initialise the items into a dictionary with counts.
     items: Dict[str, int] = {item: skus.count(item) for item in skus}
 
+    # Return if invalid item in basket.
+    if any(item not in price_table for item in skus):
+        return -1
+
     def apply_special_offers(item: str, count_of_item: int,
                              special_offers_to_process: Dict[str, List[Tuple[int, Union[int, str]]]]):
         # If no special available for item.
@@ -32,7 +36,7 @@ def checkout(skus: str) -> int:
             return 0
 
         best_discount: int = 0
-        for offer in special_offers_to_process:
+        for offer in special_offers_to_process[item]:
             num_item_required: int
             offer: Tuple[int, Union[int, str]]
             num_item_required, reward = offer
@@ -50,8 +54,45 @@ def checkout(skus: str) -> int:
                 # Take the 'free' items out of the basket.
                 items[freebee_item] -= (num_freebee_items * num_times_offer_applied)
 
+                # Calculate a total discount.
+                total_discount: int = num_times_offer_applied * (num_freebee_items * price_table[freebee_item])
 
-    return -1
+            # Process multibuy discounts.
+            else:
+                num_times_offer_applied: int = count_of_item // num_item_required
+                # Calculate the discount (difference between special and raw price) of offer.
+                discount_from_offer: int = (price_table[item] * num_item_required) - reward
+                total_discount: int = num_times_offer_applied * discount_from_offer
+
+            best_discount = max(best_discount, total_discount)
+
+        return best_discount
+
+    total_checkout_value: int = 0
+
+    total_freebees_discount: int = 0
+    # Apply 'freebees' first, as this will take out from the basket.
+    for item, count in items.items():
+        if item not in freebees_specials:
+            continue
+        total_freebees_discount += apply_special_offers(
+            item=item, count_of_item=count, special_offers_to_process=freebees_specials
+        )
+
+    # Process 'multibuys' and regular prices.
+    for item, count in items.items():
+        if item not in multibuy_specials:
+            continue
+        # Take off any multibuy price.
+        multibuy_discount: int = apply_special_offers(
+            item=item, count_of_item=count, special_offers_to_process=multibuy_specials
+        )
+        total_checkout_value -= multibuy_discount
+
+        # Add regular price.
+        total_checkout_value += price_table[item] * count
+
+    return total_checkout_value if total_checkout_value >= 0 else -1
 
 
 if __name__ == '__main__':
