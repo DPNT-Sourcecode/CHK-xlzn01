@@ -46,7 +46,7 @@ def checkout(skus: str) -> int:
                 freebee_item: str = reward[1]
 
                 # Check if freebee item is in the basket, if not then no reward.
-                if items.get(freebee_item) == 0:
+                if items.get(freebee_item, 0) == 0:
                     continue
 
                 num_times_offer_applied: int = count_of_item // num_item_required
@@ -97,3 +97,4 @@ if __name__ == '__main__':
     basket: str = "EEB"
 
     print(checkout(skus=basket))
+
