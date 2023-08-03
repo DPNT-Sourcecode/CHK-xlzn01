@@ -97,4 +97,3 @@ if __name__ == '__main__':
     basket: str = "EEB"
 
     print(checkout(skus=basket))
-
