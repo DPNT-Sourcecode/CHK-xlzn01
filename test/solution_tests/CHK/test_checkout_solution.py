@@ -21,4 +21,3 @@ class TestCheckoutSolution(unittest.TestCase):
             130 + checkout_solution.price_table["B"]["price"],
             checkout_solution.checkout("ABAA")
         )
-

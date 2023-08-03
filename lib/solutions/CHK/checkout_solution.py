@@ -42,8 +42,3 @@ def checkout(skus: str) -> int:
                             skus = skus.replace(offer[-1], '', 1)
 
     return total_price
-
-
-
-
-
