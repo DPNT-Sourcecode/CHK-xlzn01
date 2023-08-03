@@ -1,5 +1,4 @@
-from typing import Dict, Tuple, NamedTuple, List, Union
-from collections import namedtuple
+from typing import Dict, Tuple, List, Union
 
 price_table = {
     "A": 50,
@@ -98,4 +97,3 @@ if __name__ == '__main__':
     basket: str = "EEB"
 
     print(checkout(skus=basket))
-

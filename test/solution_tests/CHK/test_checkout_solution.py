@@ -57,3 +57,9 @@ class TestCheckoutSolution(unittest.TestCase):
             250,
             checkout_solution.checkout("AAAAAA")
         )
+
+    def test_checkout_single_e_returns_e(self):
+        self.assertEqual(
+            40,
+            checkout_solution.checkout("E")
+        )
